@@ -1,6 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useSelector} from 'react-redux';
+import {selectAllFurnitureProducts} from '../features/products/productsSlice';
+import TopDealsProduct from '../components/UI/TopDeals';
+
+
 
 function Furniture(){
+
+      useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+      
+      
+    const allFurniture = useSelector(selectAllFurnitureProducts);
+    console.log("allfurrrrrrrrr", allFurniture)
+
+
   return (
     <div className="furniture-wrp">
       <h2> Furniture</h2>
@@ -12,6 +27,10 @@ function Furniture(){
             <h3>Shop By Categories</h3>
 
             <div className="all-category">
+                <div className="Cat-a all">
+                    <img src="https://ii1.pepperfry.com/assets/w23-clip-ctg-all.png" alt="" />
+                    <h4>All</h4>
+                </div>
                 <div className="Cat-a">
                     <img src="https://ii1.pepperfry.com/media/wysiwyg/banners/1_3602X_110425.jpg" alt="" />
                     <h4>Sofas</h4>
@@ -28,17 +47,14 @@ function Furniture(){
 
                 <div className="Cat-a">
                     <img src="http://ii1.pepperfry.com/media/wysiwyg/banners/3_3602X_110425.jpg" alt="" />
-                    <h4>Dining Table</h4>
+                    <h4>Tables</h4>
                 </div>
                
                 <div className="Cat-a">
                     <img src="https://ii1.pepperfry.com/media/wysiwyg/banners/8_3602X_110425.jpg" alt="" />
                     <h4>Wardobes</h4>
                 </div>
-                <div className="Cat-a">
-                    <img src="https://ii1.pepperfry.com/media/wysiwyg/banners/4_3602X_110425.jpg" alt="" />
-                    <h4>Study Tables</h4>
-                </div>
+               
             </div>
        </div>
 
@@ -56,7 +72,7 @@ function Furniture(){
        </div>
 
        <div className="all-items">
-
+            <TopDealsProduct   topDealProducts={allFurniture} />
         
        </div>
 

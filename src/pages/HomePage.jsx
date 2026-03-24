@@ -1,6 +1,4 @@
 import React, {useState, useEffect, useRef} from 'react';
-// import {useSelector} from "react-redux";
-// import {selectBannerSliderProducts} from '../features/products/productsSlice';
 import Slider from '../components/UI/Slider';
 import TopDeals from '../components/UI/TopDeals';
 import AllDepartment from '../components/UI/AllDepartment';
@@ -12,21 +10,32 @@ import NewArrivals from '../components/UI/NewArrivals';
 import DealOfTheDay from '../components/UI/DealOfTheDay';
 import { useSelector } from 'react-redux';
 import { selectTopDealsProducts } from '../features/products/productsSlice';
+import { selectAllProduct, selectOnlyForYouProducts } from "../features/products/productsSlice";
+import ChatWithUs from '../components/UI/ChatWithUs';
+
+import ProductCardTypeA from '../components/Shared/ProductCardTypeA';
 
 
 function HomePage() {
 
     const topDealProducts = useSelector(selectTopDealsProducts);
+    const allProducts =  useSelector(selectAllProduct);
+    const onlyForYouProducts =  useSelector(selectOnlyForYouProducts);
+
+    const beatProduct = allProducts.find(p => p.id === "T04233" );
+    // console.log("beatttt",beatProduct )
 
   return (
-    <div className="HomePage ">
+    <div className="HomePage">
       <div className="home-wrp">
          <div className="Sliders-wrapper">
-          <Slider />
+          <Slider />          
          </div>
          <div className="marquee-banner">
-                <marquee behavior="scroll" direction="left">Top Brands, Upto 80% OFF Only on Click & Collect</marquee>
-         </div>
+          <div className="marquee-content">
+            <span>Top Brands, Upto 80% OFF Only on Click & Collect</span>
+          </div>
+        </div>
          <div className="all-departments"> 
             <AllDepartment />
          </div>
@@ -41,17 +50,28 @@ function HomePage() {
           <NewArrivals />
          </div>
 
-         <div className="top-delas-wrapper"> 
-          <TopDeals  topDealProducts={topDealProducts}/>
-         </div>
+       
          <div className="two-columns-aid">
-          <TwoColumnWrap />
+          <TwoColumnWrap  product= { beatProduct}/>
          </div>
+
+            <div className="top-delas-wrapper"> 
+          <TopDeals  topDealProducts={topDealProducts} title={"Top Deals"}/>
+         </div>
+
           <div className="slider-with-side-banner">
             <SliderWithSideBanner />
           </div> 
+
+          <div className="only-for-you">
+              <ProductCardTypeA title={"Only For You"} products={onlyForYouProducts}/>
+          </div>
           <div className="deal-of-the-day-section">
             <DealOfTheDay />
+          </div>
+
+          <div className="chatSupportWrp">
+             <ChatWithUs/>
           </div>
           
       </div>

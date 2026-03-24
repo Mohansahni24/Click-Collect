@@ -1,11 +1,23 @@
 import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {useSelector} from "react-redux";
 import {selectBannerSliderProducts} from '../../features/products/productsSlice';
-import bannerImageA from '../../assets/images/banner-img-3.avif';
-import bannerImageB from '../../assets/images/banner-img-2.avif';
+import { selectAllProduct } from '../../features/products/productsSlice';
+
+import {useNavigate} from 'react-router-dom';
 
 function Slider() {
   const bannerSlideProducts = useSelector(selectBannerSliderProducts);
+  const allProducts = useSelector(selectAllProduct);
+
+  const rightBannProductA = allProducts.find(p => p.id === "B0380");
+
+  const rightBannProductB = allProducts.find(p => p.id === "E0345")
+
+
+
+  const navigate = useNavigate();
+
+  console.log("banner slider productsssssx", rightBannProductA )
   const [currIndex, setCurrIndex] = useState(1); // Start from 1 because we added a duplicate at the beginning
   const [isTransitioning, setIsTransitioning] = useState(true);
   const sliderRef = useRef(null);
@@ -159,8 +171,9 @@ function Slider() {
               <div 
                 style={{...styles.slide, width: `${100 / totalSlides}%`}} 
                 key={`slide-${index}-${item.id || index}`}
+                onClick={() => navigate(`/product/${item.id}`)}
               >
-                <img src={item.image} alt="" style={styles.image} />
+                <img src={item.images[0]} alt="" style={styles.image} />
               </div>
             ))}
           </div>
@@ -183,12 +196,14 @@ function Slider() {
           )}
         </div>
       </div>
+
+
       <div className="slider-right">
-        <div className="top">
-          <img src={bannerImageA} alt="" />
+        <div className="top"  onClick={() => navigate(`/product/${rightBannProductA.id}`)}>
+          <img src={ rightBannProductA.images[0]} alt="" />
         </div>
-        <div className="bottom">
-          <img src={bannerImageB} alt="" />
+        <div className="bottom" onClick={() => navigate(`/product/${rightBannProductB.id}`)}>
+          <img src={rightBannProductB.images[0]} alt="" />
         </div>
       </div>
     </div>
@@ -207,13 +222,13 @@ const styles = {
     display: "flex",
   },
   slide: {
-    height: "400px",
+    height: "360px",
     flexShrink: 0,
   },
   image: {
     width: "100%",
     height: "100%",
-    objectFit: "cover",
+    objectFit: "contain",
   },
   // Dots styles
   dotsContainer: {

@@ -7,12 +7,18 @@ import TwoColumnWrap from '../components/UI/TwoColumnWrap';
 import TopDeals from '../components/UI/TopDeals';
 
 
+
 function HotDeals(){
     const allProducts = useSelector(selectAllProduct) ;
     // console.log("hotDeals", allProducts)
+    
     const flashDealProducts = allProducts.filter(p => p.discount > 30);
 
     const todayForYouProducts = allProducts.filter(p => p.discount > 20 && p.discount <= 30);
+
+    
+        const sofaProduct = allProducts.find(p => p.id === "T01419" );
+        // console.log("beatttt",sofaProduct )
 
     // countdown timer state (e.g. start at 24 hours = 86400 seconds)
     const [timeLeft, setTimeLeft] = React.useState(29900);
@@ -72,15 +78,15 @@ function HotDeals(){
             </div>
             <div className="add-deal-wrp">
                                 <div className="two-columns-aid">
-                                    <TwoColumnWrap />
+                                    <TwoColumnWrap product={sofaProduct}/>
                                 </div>
             </div>
 
             <div className="today-for-you-wrp">
                  <div className="today-for-you-outer-wrp">
-                    <h2>Today For You!</h2>
+                    
                     <div>
-                        <TopDeals topDealProducts={todayForYouProducts} />
+                        <TopDeals topDealProducts={todayForYouProducts} title={"Today For You!"}/>
                     </div>
                  </div>
             </div>

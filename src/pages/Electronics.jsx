@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useEffect}from 'react';
 import { Link} from 'react-router-dom';
 import {selectAllElectronicsProducts} from '../features/products/productsSlice';
 import { useSelector } from 'react-redux';
@@ -7,6 +7,12 @@ import accessoriesBanner from '../assets/images/Electronic-Banner.jpg';
 
 function Electronics(){
      const allElectronicsProducts = useSelector(selectAllElectronicsProducts);
+
+
+       useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+      
 
      return(
             <div className="Clothing-Page">
@@ -23,6 +29,12 @@ function Electronics(){
                           <p>Electronics for adults and kids  we got you covered</p>
                        </div>
                      <ul>
+                      <li> <Link to="/clothing/men"> 
+                <div>
+                  <img src="https://ii1.pepperfry.com/assets/w23-clip-ctg-all.png" alt="" />
+                </div>
+                <p>All</p>
+              </Link></li>
                          <li> <Link to="/clothing/men"> <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr3un_PcOeFWpRUZaOPwmi5r4mKq50GIzg3Q&s" alt="" /></div><p>Mobile</p></Link></li>
                          <li> <Link to="/clothing/women"> <div><img src="https://pisces.bbystatic.com/image2/BestBuy_US/dam/ref-2950050-tvht-nav2_der-3dfe74e2-7cce-4c53-92db-cd8be57e5b5f.jpg;maxHeight=140;maxWidth=140" alt="" /></div><p>Television</p></Link></li>
                          <li> <Link to="/clothing/kids"> <div><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHY4S4ENNDA4jBQXKkNv6PZR9pIpdJWkDqbg&s" alt="" /></div><p>Laptop</p></Link></li>

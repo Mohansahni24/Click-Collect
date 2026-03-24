@@ -1,6 +1,7 @@
 
 .wishlist-page {
     padding: 0 60px;
+    min-height: calc(100vh - 460px);
 }
 
 .wishlist-page .allCards {
@@ -13,7 +14,7 @@
 .wishlist-page .allCards .img-wrp img {
     width: 100%;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .wishlist-page .allCards .card .remove-btn {

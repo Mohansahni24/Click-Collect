@@ -5,8 +5,19 @@ import LocationCrossHair from "../../assets/images/location-crosshair.svg";
 import {useDispatch} from 'react-redux';
 import {addShippingAddress} from '../cart/cartSlice';
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 
 const Address = () => {
+    
+  const handleSuccess = () =>{
+       toast.success("Address Saved Successfully");
+  }
+
+  const handleError = () =>{
+       toast.error("Please fill all required fields");
+  }
+   
   const [addressData, setAddressData] = useState({
     name: "",
     phone: "",
@@ -42,15 +53,17 @@ const Address = () => {
       // validate required fields
       const {name, phone, address, city, state, zip} = addressData;
       if(!name || !phone || !address || !city || !state || !zip){
-          alert("Please fill all required fields");
+          handleError();
           return;
       }
       dispatch(addShippingAddress(addressData));
-        alert("Address saved successfully!");
+       handleSuccess();
+       navigate('/cart');
+       
   }
 
   return (
-    <div>
+    <div className="address-wrp">
       <h3>Address Details</h3>
       <div className="address-container">
         <div className="map-container">
@@ -200,7 +213,7 @@ const Address = () => {
         
       </form>
         <div className="save-btn">
-          <button type="button" onClick={() => {handleSaveAddress(); navigate('/cart'); }} >
+          <button type="button" onClick={() => {handleSaveAddress(); }} >
             Save Address
           </button>
         </div>

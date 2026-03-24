@@ -10,17 +10,28 @@ import couponRedIcon from '../../assets/images/coupon-icon-red.webp';
 import couponGreyIcon from '../../assets/images/coupon-icon-blue.webp';
 import {addOrder} from '../orders/ordersSlice';
 import {useDispatch} from 'react-redux';
+import toast from "react-hot-toast";
+
+
 import './CartPage.css';
 
 function  CartPage() {
+    const handlSuccess = (code)  =>{
+        toast.success(code);
+    }
+
+     const handlError = (code)  =>{
+        toast.error(code);
+    }
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    
     const cartItems = useSelector(selectCartItems);
     const shippingAddress = useSelector(selectShippingAddress);
     const wishlisItems = useSelector(selectWishlistItems);
     console.log("shipping address in cart pageee", shippingAddress);
-
+    
     const {increaseItemQuantity, decreaseItemQuantity, removeItemFromCart, clearCartItems} = useCart();
     const {addItemToWishlist} = useWishlist();
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,8 +40,9 @@ function  CartPage() {
     const [deliveryCharge, setDeliveryCharge] = useState(49);
     const [couponDiscount, setCouponDiscount] = useState(0);
     const [appliedCoupon, setAppliedCoupon] = useState(null);
-
-
+    const [couponInput, setCouponInput] = useState('');
+    
+    
     useEffect(() => {
       window.scrollTo(0, 0);
     }, []);
@@ -40,9 +52,7 @@ function  CartPage() {
             return wishlisItems.some(  (item) => item.id === productId);
     }
      
-      const orderItem ={
-         
-      }
+     
    
         const deliveryDate = new Date();
         deliveryDate.setDate(deliveryDate.getDate() + 4);
@@ -63,29 +73,47 @@ function  CartPage() {
     const grandTotal = cartTotal + handlingFee + deliveryCharge - discountTotal - couponDiscount;
     const totalDisIncCoupon =  discountTotal + couponDiscount;
 
-    const applyCoupon = (code) =>{
-  
-          switch(code){
-                 case 'NEW50':
-                    setCouponDiscount(grandTotal * 0.5);
-                    setAppliedCoupon('NEW50');
-                    break;
-                 case 'FLAT10':
-                      setCouponDiscount(grandTotal * 0.1)
-                      setAppliedCoupon('FLAT10');
-                      break;
-                 case 'FREEDEL':
-                      setDeliveryCharge(0);
-                      setAppliedCoupon('FREEDEL');
-                      break;   
-                  case 'MOHAN20':
-                       setCouponDiscount(grandTotal * 0.2)
-                       setAppliedCoupon('MOHAN20');
-                       break;          
-          }
+   const applyCoupon = (code) => {
 
-            
+    // Reset first
+    setCouponDiscount(0);
+    setDeliveryCharge(49);
+
+    let discount = 0;
+
+    switch(code){
+        case 'NEW40':
+            discount = cartTotal * 0.4;
+            setCouponDiscount(discount);
+            setAppliedCoupon('NEW40');
+            handlSuccess("NEW40 Applied Successfully");
+            break;
+
+        case 'FLAT10':
+            discount = cartTotal * 0.1;
+            setCouponDiscount(discount);
+            setAppliedCoupon('FLAT10');
+             handlSuccess("FLAT10 Applied Successfully")
+            break;
+
+        case 'FREEDEL':
+            setDeliveryCharge(0);
+            setAppliedCoupon('FREEDEL');
+             handlSuccess("FREEDEL Applied Successfully")
+            break;
+
+        case 'MOHAN60':
+            discount = cartTotal * 0.6;
+            setCouponDiscount(discount);
+            setAppliedCoupon('MOHAN60');
+            handlSuccess("MOHAN60 Applied Successfully");
+            break;
+
+        default:
+            setAppliedCoupon(null);
+            handlError("Invalid Coupon");
     }
+}
 
        const orderData = {
            items:cartItems,
@@ -114,16 +142,17 @@ function  CartPage() {
              </div>
          ) : (
                <div className="cart-wrapper">
-            {shippingAddress?.name?<h1>  Order Details </h1>: <h1> Your Cart</h1> } 
+            {shippingAddress?.name?<h1 className="order-detail">  Order Details </h1>: <h1> Your Cart</h1> } 
 
             {shippingAddress?.name && (
                       <div className="delivery-info">
-                <div>
-                 <h3><strong>Deliver to:</strong> {shippingAddress?.name}</h3>
+                <div className="address_wrp">
+                 <h3><strong>Deliver to:</strong> <span className="name">{shippingAddress?.name}</span></h3>
+                 {/* <h4> </h4> */}
                  <p>{shippingAddress?.houseNo}, {shippingAddress?.city}, {shippingAddress?.state}, {shippingAddress?.zip}</p>
                  </div>
-                 <div>
-                    <h3>Expected Delivery</h3>
+                 <div className="delivery_wrp">
+                    <h3><strong>Expected Delivery:</strong></h3>
                      <p>{formattedDate}</p>
                   </div>  
             </div>
@@ -251,10 +280,10 @@ function  CartPage() {
                             <form action="" onSubmit={(e)=>{
                                 e.preventDefault();
                                 // console.log("Apply coupon codeeee", e.target[0].value);
-                                const couponCode = e.target[0].value.trim().toUpperCase();
+                                const couponCode = couponInput.trim().toUpperCase();
                                 applyCoupon(couponCode);
                             }}>
-                                <input type="text" placeholder="Enter coupon code"  style={{ textTransform: "uppercase" }} />
+                                <input type="text" placeholder="Enter coupon code" value={couponInput} onChange={(e) => setCouponInput(e.target.value)} style={{ textTransform: "uppercase" }} />
                                 <button className="apply-btn" >Add Coupon</button>
                             </form>
                          </div>
@@ -264,11 +293,11 @@ function  CartPage() {
                              <div className="coupon-wrp">
                                   <div className="icon"><img src={couponRedIcon} alt="Coupon icon" /></div>
                                   <div className="details">
-                                      <h5>NEW50</h5>
-                                      <p>Get 50% off on your first order</p>   
+                                      <h5  style={{cursor: 'pointer'}}>NEW40</h5>
+                                      <p>Get 40% off on your first order</p>   
                                   </div>
                                   <div className="apply-btn-wrp">
-                                      <button disabled={appliedCoupon === 'NEW50'} className="apply-btn" onClick={() => applyCoupon('NEW50')}> {appliedCoupon === 'NEW50' ? 'Applied' : 'Apply'}</button>
+                                      <button disabled={appliedCoupon === 'NEW40'} className="apply-btn" onClick={() => {setCouponInput('NEW40');  applyCoupon('NEW40')}}> {appliedCoupon === 'NEW40' ? 'Applied' : 'Apply'}</button>
                                   </div>
                               </div>  
                         </div>
@@ -282,14 +311,14 @@ function  CartPage() {
                                  <div className="coupon-wrp">
                                   <div className="icon"><img src={couponGreyIcon} alt="Coupon icon" /></div>
                                   <div className="details">
-                                      <h5>FLAT10</h5>
+                                      <h5  style={{cursor: 'pointer'}}>FLAT10</h5>
                                       <p>Get flat 10% off on your overall purchase </p>   
                                   </div>
                                   <div className="apply-btn-wrp">
                                       <button
                                           className="apply-btn"
-                                          onClick={() => applyCoupon('FLAT10')}
-                                          disabled={applyCoupon === 'FLAT10'}
+                                          onClick={() => {setCouponInput('FLAT10'); applyCoupon('FLAT10');}}
+                                          disabled={appliedCoupon === 'FLAT10'}
                                       >
                                           {appliedCoupon === 'FLAT10' ? 'Applied' : 'Apply'}
                                       </button>
@@ -299,13 +328,13 @@ function  CartPage() {
                                  <div className="coupon-wrp">
                                   <div className="icon"><img src={couponGreyIcon} alt="Coupon icon" /></div>
                                   <div className="details">
-                                      <h5>FREEDEL</h5>
+                                      <h5  style={{cursor: 'pointer'}}>FREEDEL</h5>
                                       <p>Get free delivery on your purchase </p>   
                                   </div>
                                   <div className="apply-btn-wrp">
                                       <button
                                           className="apply-btn"
-                                          onClick={() => applyCoupon('FREEDEL')}
+                                          onClick={() => {setCouponInput('FREEDEL'); applyCoupon('FREEDEL')}}
                                           disabled={applyCoupon === 'FREEDEL'}
                                       >
                                           {appliedCoupon === 'FREEDEL' ? 'Applied' : 'Apply'}
@@ -331,6 +360,7 @@ function  CartPage() {
                         {shippingAddress?.name ?(
                             <button className="edit-delivery-btn" onClick={() => {
                                 dispatch(addOrder(orderData));
+                                handlSuccess("Order Placed 🎉")
                                 navigate('/order-confirmation');
                                 clearCartItems();
                             }}>Place Order</button>

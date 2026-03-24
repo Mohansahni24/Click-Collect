@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import {useNavigate} from 'react-router-dom';
 import { selectNewArrivalsProducts } from '../../features/products/productsSlice';
 
 function NewArrivals() {
+   const navigate = useNavigate();
+
   // Fixed variable name - using the selector correctly
   const newArrivalsProducts = useSelector(selectNewArrivalsProducts);
   
@@ -80,7 +83,7 @@ function NewArrivals() {
               }}
             >
               {newArrivalsProducts.map((product, index) => (
-                <div key={product.id || index} className="product-card">
+                <div key={product.id || index} className="product-card" onClick={() => navigate(`/product/${product.id}`)}>
                   <img 
                     src={product.images[0]} 
                     alt={product.name} 

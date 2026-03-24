@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useParams, useNavigate} from 'react-router-dom';
 import {selectAllProduct} from '../features/products/productsSlice';
 import {useSelector} from 'react-redux';
@@ -10,6 +10,12 @@ import {useWishlist} from '../hooks/useWishlist';
 // import {selectAllProduct} from '../../features/products/productsSlice';
 
 const ProductDetailPage = () => {
+    
+   useEffect(() => {
+          window.scrollTo(0, 0);
+        }, []);
+        
+
     const {id} = useParams();
     const  allProducts = useSelector(selectAllProduct);
       const {addItemToCart} = useCart();
@@ -23,6 +29,7 @@ const ProductDetailPage = () => {
     const inCart = cartItems.some((item) => item.product.id == product?.id);
     const inWishlistItems = wishlistItems.some((item) => item.id == product?.id);
     const [currImgIndex, setCurrImgIndex] = useState(0);
+    const [timeLeft, setTimeLeft] = useState(10 * 60 * 60 + 59 * 60); // 10 hours 59 minutes in seconds
     
 
     const handleWishlist = ()  =>{
@@ -39,9 +46,30 @@ const ProductDetailPage = () => {
    const handleThumbNilClick = (index) =>{
         setCurrImgIndex(index);
     }
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setTimeLeft(prev => {
+                if (prev <= 1) {
+                    clearInterval(interval);
+                    return 0;
+                }
+                return prev - 1;
+            });
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const formatTime = (seconds) => {
+        const h = Math.floor(seconds / 3600);
+        const m = Math.floor((seconds % 3600) / 60);
+        const s = seconds % 60;
+        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    };
+
     // console.log("found product", product);
   return (
-    <div className="product-details-page">
+    <div className={`product-details-page  ${product.stock== 0 &&  "out-of-stock"}`}>
       <div className="product-details-wrapper">
         <div className="detail-page-top">
           <div className="img-wrp">
@@ -57,31 +85,44 @@ const ProductDetailPage = () => {
                 src={product.images[currImgIndex]} 
                 alt="Product" 
               />
+              {product.stock == 0 &&  <h5>Sold Out</h5> }
+             
             </div>
           </div>
           <div className="product-info-wrp">
             <div>
-              <p className="product-brand">Sony</p>
-              <h2 className="product-name">Sony WH-1000XM4 Wireless Noise-Cancelling Over-Ear Headphones</h2>
+              <div className="brand-timer-wrpp">
+                 <p className="product-brand">{product.brand}</p>
+                   {product.discount > 60 && <div className="deals-end-in">
+                      <p>
+                          <svg data-testid="price-block-deal-expiration-timer-message-icon" fill="none" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg" stroke-width="0.5"><path d="M12 22.5C6.21 22.5 1.5 17.79 1.5 12C1.5 6.21 6.21 1.5 12 1.5C17.79 1.5 22.5 6.21 22.5 12C22.5 17.79 17.79 22.5 12 22.5ZM12 3C7.04 3 3 7.04 3 12C3 16.96 7.04 21 12 21C16.96 21 21 16.96 21 12C21 7.04 16.96 3 12 3Z" fill="#000000"></path><path d="M15.25 16C15.06 16 14.87 15.93 14.72 15.78L11.47 12.53C11.3293 12.3895 11.2502 12.1988 11.25 12V5.75C11.25 5.34 11.59 5 12 5C12.41 5 12.75 5.34 12.75 5.75V11.69L15.78 14.72C16.07 15.01 16.07 15.49 15.78 15.78C15.63 15.93 15.44 16 15.25 16Z" fill="#000000"></path></svg>
+                          Deal ends in {formatTime(timeLeft)}
+                      </p>
+                  </div> }
+                  
+               </div>
+              <h2 className="product-name">{product.name}</h2>
+              <p className="discription">{product.description}</p>
               <p className="product-rating"> ⭐⭐⭐⭐⭐ <strong>{product.rating}</strong>(1500 reviews)</p>
               <div className="product-price-section">
-                  <div className="price-wrp">
+                <div className="price-wrp">
                     <h3 className="product-special-price">Special Price</h3>
-                <h4 className="product-offer">
-                  <span>₹15000 off</span>
-                </h4>
+                    <h4 className="product-offer">
+                      <span>₹{Math.round((product.originalPrice * product.discount)/100)} off</span>
+                    </h4>
                 </div>
-               
                     <p>
-                      <span className="product-price">Rs348.00</span>
-                      <span className="product-original-price">Rs499.99</span>
-                      <span className="product-discount">-12%</span>
+                        <span className="product-price"> Rs {Math.round((product.originalPrice * (100 - product.discount)) / 100)}</span>
+                        <span className="product-original-price">Rs{product.originalPrice}</span>
+                      <span className="product-discount">-{product.discount}%</span>
                     </p>
                 
               </div>
-              <div className="product-availability">
-                <p>Availability: <span>In Stock</span></p>
+              <div className="product-availability">       
+                <p>Availability: {product.stock > 0 ?(<span className="in-stock" >In Stock {product.stock < 5 &&  <span>({product.stock})</span>}</span>) :(<span className="not-in-stock">Out of stock</span>)}</p>
               </div>
+              {product.stock < 3 && product.stock  > 0 && (<div className="hurry-tab"><h5>Hurry, Only a few left!</h5></div>)}
+              
               <div className="free-shipping-info">
                 <p><strong>Free Shipping*</strong></p>
                 <div className="shipping-details">
@@ -109,8 +150,9 @@ const ProductDetailPage = () => {
                 <div
                   className="add-to-cart-btn"
                   onClick={() => (inCart ? navigate('/cart') : addItemToCart(product))}
+                 
                 >
-                  <span>{inCart ? 'Go to Cart' : 'Add to Cart'}</span>
+                  <span>{inCart ? 'Go to Cart' : (product.stock == 0 ? "Comming Soon" : "Add to Cart")}</span>
                 </div>
                 <div className="save-btn" onClick={() => handleWishlist()}>
                   <span className="icon">
@@ -176,11 +218,13 @@ const ProductDetailPage = () => {
                 <div className="title"> <h4>Description and specifications</h4></div>
                 <div className="description-and-spec-wrp">
                      <div className="description-wrp">
-                         <h3>Description</h3>
-                            <p>Turn any space into your office or entertainment center with the new Lenovo Ideatab 11 Tablet , which includes its versatile Keyboard and precise Pen Plus.</p>
-                           <p>Its stunning 11-inch IPS display with a resolution of 2560 x 1600 delivers unparalleled image quality for work, watching series, or designing. Experience superior performance for even the most demanding multitasking thanks to its impressive 8GB of LPDDR4x RAM and ultra-fast 128GB of UFS 2.2 storage, powered by a robust MediaTek Helio G88 processor .</p>
-                           <p>It comes equipped with the Android 15 operating system, guaranteeing access to the latest features and top-notch security. It also features USB-C ports, a 3.5 mm headphone jack, and a card slot.</p>
-                           <p>Capture your moments with its 8 MP rear camera and make crystal-clear video calls with the 5 MP front camera. All this with the peace of mind of a 7040 mAh battery that keeps you going all day.</p>
+                            <h3>Description</h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+                            
+                           <p>Lorem ipsum dolor unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut consequatur.</p>
+
+                           <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehen.</p>
+                           <p>Lorem ipsum dolor si ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
                       </div>
                      <div className="specification-wrp">
                       <h3>Specifications</h3>

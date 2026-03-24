@@ -5,7 +5,7 @@ function BenefitsBar() {
     {
       title: "Secure shipping",
       icon: "https://imagescontentstack.coppel.com/v3/assets/blt81f564913ca7e893/bltbcb085cd34d1446e/68158481473f11d280acafa5/envio_gratis.png?quality=75&format=pjpg&auto=avif",
-      link: "https://centrodeayuda.coppel.com/s/envios-y-entregas",
+   
       alt: "Secure shipping icon"
     },
     {
@@ -17,13 +17,13 @@ function BenefitsBar() {
     {
       title: "Exclusive products",
       icon: "https://imagescontentstack.coppel.com/v3/assets/blt670214de05ad4e21/blt62ecdac92e0d8b19/66fbcc328883c9198d4cb8ae/productos-exclusivos.svg?quality=75&format=pjpg&auto=avif",
-      link: "/sd/RB2514EPMTPEMOODS?mejores_ofertas=true&pmNodeId=11404&prNodeId=11419&regionTelcel=9",
+  
       alt: "Icon for exclusive products"
     },
     {
       title: "Easy and secure purchase",
       icon: "https://imagescontentstack.coppel.com/v3/assets/blt670214de05ad4e21/blt8bea9b24acaacaf9/66fbe20abb7fe52d898b7320/compra-fácil-y-segura.svg?quality=75&format=pjpg&auto=avif",
-      link: "https://centrodeayuda.coppel.com/s/seguridad-y-privacidad",
+   
       alt: "Icon for easy and secure purchase"
     }
   ];
@@ -33,13 +33,13 @@ function BenefitsBar() {
       <div className="benefits-container" id="benefitsBlock" data-testid="benefitsBlock">
         <div data-testid="benefits-of-buying" className="benefits-content">
           <a 
-            href="/inf/beneficios-coppel" 
+           
             className="benefits-header-link"
             data-testid="benefits-heading"
           >
             <h3 className="benefits-title">
-              Benefits of shopping at Coppel.com
-            </h3>
+              Benefits of shopping at <span>click</span> <span>& collect</span>
+            </h3>  
             <svg 
               width="24" 
               height="24" 
@@ -70,7 +70,7 @@ function BenefitsBar() {
                 className="benefit-item"
               >
                 <a 
-                  href={benefit.link}
+                
                   title={benefit.title}
                   className="benefit-link"
                 >

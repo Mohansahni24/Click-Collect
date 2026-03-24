@@ -2,13 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectNewArrivalsProducts } from '../../features/products/productsSlice';
 import { selectAllHeadphonesProducts  } from '../../features/products/productsSlice';
+import {useNavigate} from "react-router-dom";
+
 
 function SliderWithSideBanner() {
   // Fixed variable name - using the selector correctly
   const newArrivalsProducts = useSelector(selectNewArrivalsProducts);
-  const allHeadphone = useSelector(selectAllHeadphonesProducts );
-  console.log("allHeadphone", allHeadphone);
+  const allHeadphone = useSelector(selectAllHeadphonesProducts) ?? [];
+  console.log("allHeadphoneeeee", allHeadphone);
   
+ const navigate = useNavigate();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [productsPerView, setProductsPerView] = useState(3);
   const sliderRef = useRef(null);
@@ -32,8 +36,8 @@ function SliderWithSideBanner() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Calculate maxIndex based on actual products and responsive setting
-  const maxIndex = Math.max(0, newArrivalsProducts.length - productsPerView);
+  // Calculate maxIndex based on the array actually being displayed
+  const maxIndex = Math.max(0, allHeadphone.length - productsPerView);
 
   // Navigation functions
   const nextSlide = () => {
@@ -49,7 +53,7 @@ function SliderWithSideBanner() {
     if (currentIndex > maxIndex) {
       setCurrentIndex(Math.max(0, maxIndex));
     }
-  }, [productsPerView, newArrivalsProducts.length, currentIndex, maxIndex]);
+  }, [productsPerView, allHeadphone.length, currentIndex, maxIndex]);
 
   return (
     <div className="slider-with-banner-container">
@@ -86,7 +90,7 @@ function SliderWithSideBanner() {
               }}
             >
               {allHeadphone.map((product, index) => (
-                <div key={product.id || index} className="product-card">
+                <div key={product.id || index} className="product-card" onClick={() => navigate(`/product/${product.id}`)}>
                     <div className="image-wrp">
                         <img 
                             src={product.images[0]} 

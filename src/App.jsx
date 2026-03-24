@@ -15,6 +15,14 @@ import OrderConfirmation from './features/orders/OrderConfirmation';
 import MyOrder from './features/orders/MyOrder';
 import HotDeals from './pages/HotDeals';
 import Furniture from './pages/Furniture';
+import Shoes from './pages/Shoes';
+import Toys from './pages/Toys';
+import Women from './pages/Women';
+import Men from './pages/Men';
+
+
+
+
 
 
 // import ProductDetailPage from './pages/ProductDetailPage';
@@ -34,6 +42,10 @@ function App() {
           <Route path="/accessories" element={<Accessories/>} />
           <Route path="/electronics" element={<Electronics/>} />
           <Route path="/books" element={<Book/>} />
+          <Route path="/shoes" element={<Shoes/>} />
+          <Route path="/toys" element={<Toys/>}  />
+          <Route path="/women"  element={<Women/>} />
+          <Route path="/men"  element={<Men/>}/>
           <Route path="/toys-games" element={<ToysAndGames/>} />
           <Route path="/address" element={<Address />} />
           <Route path="/hot-deals" element={<HotDeals />} />

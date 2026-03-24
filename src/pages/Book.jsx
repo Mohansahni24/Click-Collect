@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import './Clothing.css';
 import  { useSelector } from 'react-redux';
@@ -10,6 +10,11 @@ import bookBanner from '../assets/images/book-banner.jpg';
 
 
 function Book(){
+
+        useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
+      
       const allClothingProducts = useSelector(selectAllBooksProducts);
     return(
                 <div className="Clothing-Page">
@@ -26,11 +31,16 @@ function Book(){
                               <p>Book for adults and kids  we got you covered</p>
                            </div>
                          <ul>
-                             <li> <Link to="/clothing/men"> <div><img src="https://i.etsystatic.com/6348769/r/il/ec8b57/4803301609/il_300x300.4803301609_799p.jpg" alt="" /></div><p>Literature</p></Link></li>
-                             <li> <Link to="/clothing/women"> <div><img src="https://i.etsystatic.com/5411407/r/il/082a5e/6223042790/il_300x300.6223042790_tqqv.jpg" alt="" /></div><p>Religion & Spirituality Books</p></Link></li>
-                             <li> <Link to="/clothing/kids"> <div><img src="https://i.etsystatic.com/6286847/r/il/c23185/5207734503/il_300x300.5207734503_3kis.jpg" alt="" /></div><p>Blank Books</p></Link></li>
-                              <li> <Link to="/clothing/kids"> <div><img src="https://i.etsystatic.com/5239034/r/il/f73798/6601265625/il_300x300.6601265625_8d7v.jpg" alt="" /></div><p>Colouring Books</p></Link></li>
 
+                             <li>  <Link to="/clothing/men"> 
+                <div>
+                  <img src="https://ii1.pepperfry.com/assets/w23-clip-ctg-all.png" alt="" />
+                </div>
+                <p>All</p>
+              </Link></li>
+                             <li> <Link to="/clothing/women"> <div><img src="https://i.etsystatic.com/5411407/r/il/082a5e/6223042790/il_300x300.6223042790_tqqv.jpg" alt="" /></div><p>Philosophy & Religion </p></Link></li>
+                             <li> <Link to="/clothing/kids"> <div><img src="https://rukminim2.flixcart.com/image/1600/2140/xif0q/book/2/4/s/map-history-first-paper-hindi-original-imahhhwjdrkaghxr.jpeg?q=60" alt="" /></div><p>History</p></Link></li>
+                            
                           </ul>    
                     </div>
         
