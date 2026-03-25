@@ -147,7 +147,7 @@ return (
                     )
                 }
 
-                   <div className="ham-wrp" onClick={()=> { setMenusOpen (!menusOpen)}}>
+                   <div className="ham-wrp" onClick={()=> { setMenusOpen (true)}}>
                     <div className="hamburger" >
                             <span className="first"></span>
                             <span className="second"> </span>
@@ -198,9 +198,14 @@ return (
             </div>
         </div>
         <div className="header-btm"> 
+           
              <div className="logo-icon-wrp">
-                     <div className="mobile-logo"> <Link  to="/"> <img src={logo}/> </Link> </div> 
-                    <div className="mob-close-icon">
+                     <div className="mobile-logo" onClick={() => {
+                          setMenusOpen(false)
+                     }}> <Link  to="/"> <img src={logo}/> </Link> </div> 
+                    <div className="mob-close-icon" onClick={() => {
+                        setMenusOpen(false)
+                    }}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.414,12l6.293-6.293a1,1,0,0,0-1.414-1.414L12,10.586,5.707,4.293A1,1,0,0,0,4.293,5.707L10.586,12,4.293,18.293a1,1,0,1,0,1.414,1.414L12,13.414l6.293,6.293a1,1,0,0,0,1.414-1.414Z"></path></svg>
                     </div>
              </div>
@@ -232,6 +237,8 @@ return (
                 <div className="spacer-right">
                 </div>
         </div>
+
+        <div className="overlay" ></div>
     </div>
 </div>
 </div>

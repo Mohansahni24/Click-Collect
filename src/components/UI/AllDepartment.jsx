@@ -33,7 +33,7 @@ function AllDepartment() {
       link: "/men"
     },
     {
-      name: "Home and Furniture",
+      name: "Furniture",
       discount: "Up to 30%",
       icon: "https://imagescontentstack.coppel.com/v3/assets/blt81f564913ca7e893/blt8d81ac1d364f2770/6848751bb0379122122b5811/home-category.png?quality=75&format=pjpg&auto=avif",
       link: "/furniture"

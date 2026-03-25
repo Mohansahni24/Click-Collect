@@ -62,6 +62,7 @@ function ProductCardTypeA({ title, products }) {
                                         src="https://img.icons8.com/?size=100&id=19417&format=png&color=000000"
                                         alt=""
                                     />
+                                    <div className="rating-discount"> - {(((item.originalPrice - item.price) / item.originalPrice) * 100).toFixed(1)}%</div>
                                 </p>
 
                                 <div className="price">

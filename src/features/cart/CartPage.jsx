@@ -200,7 +200,7 @@ function  CartPage() {
                                                           addItemToWishlist(item.product);
                                                           removeItemFromCart(item.product.id);
                                                       }}>Move to wishlist</p></div>
-                                                      ) : (<div className="move-to-wishlist already">  <p>AlreadyInWishList</p></div>)}
+                                                      ) : (<div className="move-to-wishlist already">  <p>Already In WishList</p></div>)}
 
 
 
