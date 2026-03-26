@@ -59,7 +59,7 @@ function HomePage() {
           <TopDeals  topDealProducts={topDealProducts} title={"Top Deals"}/>
          </div>
 
-          <div className="slider-with-side-banner">
+          <div className="slider-with-side-banner women">
             <SliderWithSideBanner />
           </div> 
 

@@ -20,7 +20,7 @@ function SliderWithSideBanner() {
   // Handle responsive products per view
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 480) {
+      if (window.innerWidth < 531) {
         setProductsPerView(1);
       } else if (window.innerWidth < 768) {
         setProductsPerView(2);

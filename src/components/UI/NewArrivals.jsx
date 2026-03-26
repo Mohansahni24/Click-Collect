@@ -16,12 +16,12 @@ function NewArrivals() {
   // Handle responsive products per view
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 480) {
-        setProductsPerView(1);
-      } else if (window.innerWidth < 768) {
+      if (window.innerWidth < 641) {
         setProductsPerView(2);
-      } else if (window.innerWidth < 1024) {
+      } else if (window.innerWidth < 899) {
         setProductsPerView(3);
+      } else if (window.innerWidth < 1024) {
+        setProductsPerView(4);
       } else {
         setProductsPerView(4);
       }
