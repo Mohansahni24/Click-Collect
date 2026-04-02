@@ -8,7 +8,7 @@ function TwoColumnWrap({product}) {
   const navigate = useNavigate();
 
   return (
-    <div className="two-column-wrap" >
+    <div className="two-column-wrap"   onClick={() => navigate(`/product/${product.id}`)}>
       <div className="img-column" >
           <img src="https://res.cloudinary.com/da0booxc5/image/upload/v1775109155/beat-headphone_h6zvwq.webp" alt="" />
       </div>
@@ -18,7 +18,7 @@ function TwoColumnWrap({product}) {
               <p>Only at Click & Collect</p>
             </div>
             <div className="btn-wrp" >
-                <button className="shop-now-btn btn-secondary" onClick={() => navigate(`/product/${product.id}`)}>Shop Now</button>
+                <button className="shop-now-btn btn-secondary" >Shop Now</button>
              </div>      
       </div>
     </div>
