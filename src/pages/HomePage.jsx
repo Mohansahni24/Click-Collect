@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState} from 'react';
 import Slider from '../components/UI/Slider';
 import TopDeals from '../components/UI/TopDeals';
 import AllDepartment from '../components/UI/AllDepartment';
