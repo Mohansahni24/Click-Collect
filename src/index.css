@@ -2842,7 +2842,9 @@ select > option {
     font-size: 13px;
     font-weight: 700;
 }
-
+button.btn-primary, .choose-your-favorite-wrap .card .btn-tertiary{
+    color:white !important;
+}
 /* Responsive Design */
 @media (max-width: 1200px) {
   .slider-with-banner-container {
@@ -4253,6 +4255,7 @@ select > option {
 }
     .choose-your-favorite-wrap .card .btn-tertiary{
             right: -2px;
+          
 
     }
 .choose-your-favorite-wrap .card .content-wrp{

@@ -5,9 +5,6 @@ import { store } from './app/store'; // Import property store
 import App from './App';
 import { Toaster } from "react-hot-toast";
 import "leaflet/dist/leaflet.css";
-// import './styles/App.css';
-// import './styles/components.css';
-// import './styles/utilities.css';
 import './index.css'  
 
 ReactDOM.createRoot(document.getElementById('root')).render(
