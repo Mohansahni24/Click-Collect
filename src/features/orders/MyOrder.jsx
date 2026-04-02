@@ -45,7 +45,7 @@ const MyOrder = ()  =>{
                              <div className="order-card" key={o.id}>
                                   <div className="img-wrp"> <img src={o.items[0].product.images[0]} alt="" /></div>
                                   <div className="title">
-                                        <h3>{o.items[0].product.name} <span> (+ {o.items.length - 1} More Items)</span></h3>
+                                        <h3>{o.items[0].product.name}  {o.items.length  > 1 && <span> (+ {o.items.length - 1} More Items)</span> }</h3>
                                                 <p className="price">Total Rs: {o.totalAmount.toFixed(2)}</p>
                                   </div>
                                   
