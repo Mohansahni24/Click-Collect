@@ -3,12 +3,16 @@ import { useSelector } from "react-redux";
 import { useCart } from '../../hooks/useCart';
 import { useNavigate } from 'react-router-dom';
 import { selectCartItems } from '../../features/cart/cartSlice';
+import toast from "react-hot-toast";
+
+
+
 
 function ProductCardTypeA({ title, products }) {
 
     const navigate = useNavigate();
     const { addItemToCart } = useCart();
-    const allCartItems = useSelector(selectCartItems);
+        const allCartItems = useSelector(selectCartItems);
 
     const [visibleCount, setVisibleCount] = useState(10);
 
@@ -20,7 +24,7 @@ function ProductCardTypeA({ title, products }) {
         if (!isItemInCart) {
             addItemToCart(product);
         } else {
-            alert("Item already in cart");
+            toast.error("Item already in cart");
         }
     };
 

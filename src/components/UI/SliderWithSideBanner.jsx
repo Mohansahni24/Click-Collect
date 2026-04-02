@@ -55,6 +55,9 @@ function SliderWithSideBanner() {
     }
   }, [productsPerView, allHeadphone.length, currentIndex, maxIndex]);
 
+
+  
+
   return (
     <div className="slider-with-banner-container">
        <div>
@@ -63,11 +66,11 @@ function SliderWithSideBanner() {
       <div className="side-banner">
         <h4>Give the gift of music this holiday season</h4>
         <span  className="text">Amazing on-the-go sound with headphones <br></br> from top brands&nbsp;</span>
-         <a><h4>Shop all</h4></a>
+         
       </div>
 
       {/* Slider Section */}
-      <div className="product-slider-section">
+      <div className="product-slider-section" >
         <div className="product-slider-container">
           {/* Left Navigation Button - Only show if NOT at the start */}
           {currentIndex > 0 && (

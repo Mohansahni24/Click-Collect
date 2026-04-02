@@ -52,7 +52,7 @@ function App() {
           <Route path="/order-confirmation" element={<OrderConfirmation />} />
           <Route path="/my-orders" element={<MyOrder />} />
           <Route path="/furniture" element={<Furniture />}/>
-          <Route path="/login" element={<div className="container py-12">Login Page (Coming Soon)</div>} />
+          <Route path="/login" element={<div className="login-page"><h3>Login Page (Coming Soon)</h3></div>} />
           <Route path="*" element={<div className="container py-20 text-center">
             <h2 className="text-3xl font-bold mb-4">404 - Page Not Found</h2>
             <p className="text-gray-600 mb-6">The page you're looking for doesn't exist.</p>

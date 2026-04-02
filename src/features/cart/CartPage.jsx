@@ -169,7 +169,7 @@ function  CartPage() {
                                        <div className="col-a" onClick={() => navigate(`/product/${item.product.id}`)}>
                                             <img src={item.product.images[0]} alt="" />
                                        </div>
-                                        <div className="col-b">
+                                        <div className="col-b" onClick={() => navigate(`/product/${item.product.id}`)}>
                                             <h2 className="title">{item.product.name}</h2>
                                             <p>{item.product.description}</p>
                                             <p className="price">
@@ -189,7 +189,7 @@ function  CartPage() {
                                                  </div>
                                                  <div className="quantity-control">
                                                    <div className="quantity-wrp">
-                                                        <button className="decrease-btn" onClick={ () => decreaseItemQuantity(item.product.id)}><svg className="icon-module_icon__Cn42w icon-module_small__34NJe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M3 11h18v2H3z"></path></svg></button>
+                                                        <button className="decrease-btn" onClick={ () => decreaseItemQuantity(item.product.id)} disabled={item.quantity <= 1}><svg className="icon-module_icon__Cn42w icon-module_small__34NJe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M3 11h18v2H3z"></path></svg></button>
                                                         <input type="number" value={item.quantity || 1} readOnly />
                                                         <button className="increase-btn" onClick={() => increaseItemQuantity(item.product.id)}><svg className="icon-module_icon__Cn42w icon-module_small__34NJe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M21 11h-8V3h-2v8H3v2h8v8h2v-8h8z"></path></svg></button>
                                                       

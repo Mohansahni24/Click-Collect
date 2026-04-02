@@ -79,7 +79,12 @@
     font-weight: 400;
     letter-spacing: normal;
     transition: background 0.3s, box-shadow 0.3s, border-color 0.3s;
+    cursor: pointer;
+}
+
+.cart-page .cart-content .cart-card .quantity-wrp button:disabled {
     cursor: not-allowed;
+    opacity: 0.5;
 }
 
 .cart-page .cart-content .cart-card .quantity-wrp input {
@@ -318,11 +323,18 @@
 .cart-page .cart-content .cart-card .col-c .price p {
     padding-left: 2px;
 }
+.cart-page .cart-content .cart-card .col-b h2.title, .cart-page .cart-content .cart-card .col-b p {
+    cursor: pointer;
+}
+
+.cart-items input::-webkit-inner-spin-button {
+    display: none;
+}
 
 
 .cart-page .empty-cart-content {
     text-align: center;
-    padding: 82px 20px;
+    padding: 12px 20px;
 }
 
 .cart-page .empty-cart-content p {

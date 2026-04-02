@@ -25,6 +25,10 @@ function HomePage() {
     const beatProduct = allProducts.find(p => p.id === "T04233" );
     // console.log("beatttt",beatProduct )
 
+
+      const [isDealActive, setIsDealActive] = useState(false);
+          const [slideChat, setSlideChat] = useState(false);
+
   return (
     <div className="HomePage">
       <div className="home-wrp">
@@ -55,7 +59,7 @@ function HomePage() {
           <TwoColumnWrap  product= { beatProduct}/>
          </div>
 
-            <div className="top-delas-wrapper"> 
+        <div className="top-delas-wrapper"> 
           <TopDeals  topDealProducts={topDealProducts} title={"Top Deals"}/>
          </div>
 
@@ -67,11 +71,11 @@ function HomePage() {
               <ProductCardTypeA title={"Only For You"} products={onlyForYouProducts}/>
           </div>
           <div className="deal-of-the-day-section">
-            <DealOfTheDay />
+            <DealOfTheDay  isDealActive={isDealActive}  setIsDealActive={setIsDealActive} setSlideChat={setSlideChat}/>
           </div>
 
           <div className="chatSupportWrp">
-             <ChatWithUs/>
+             <ChatWithUs  slideChat={slideChat} setSlideChat={setSlideChat} setIsDealActive={setIsDealActive}/>
           </div>
           
       </div>

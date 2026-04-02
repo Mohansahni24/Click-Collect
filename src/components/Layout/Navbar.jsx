@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import logo from '../../assets/images/logo-transparent.png';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, NavLink , useNavigate} from 'react-router-dom';
 import { selectCartItems } from '../../features/cart/cartSlice';
 import { selectWishlistItems } from '../../features/wishlist/wishlistSlice';
 import { useSelector } from 'react-redux';
@@ -96,6 +96,10 @@ useEffect(() => {
   }
 }, [placeholderIndex, searchTerm, isInputFocused]);
 
+const closeMenu = () => {
+  setMenusOpen(false);
+};
+
 return (
 <div>
 <div className={`header cont-wrp ${menusOpen ? "menuOpen" : ""}`}>
@@ -103,7 +107,7 @@ return (
         <div className="header-tp"> 
             <div className="logo"> <Link  to="/"> <img src={logo}/> </Link> </div> 
             <div className="search-bar"  ref={searchRef}> 
-                    <form id="gnav-search" className="global-enhancements-search-nav wt-position-relative wt-display-flex-xs" method="GET" action="/uk/search.php" role="search" data-gnav-search="" data-ge-search-clearable="" data-trending-searches="1">
+                    <form id="gnav-search" className="global-enhancements-search-nav wt-position-relative wt-display-flex-xs" >
 
                         <div className="search-container" data-id="search-bar">
                             <div className="wt-input-btn-group global-enhancements-search-input-btn-group emphasized_search_bar emphasized_search_bar_grey_bg search-bar-container" data-id="search-suggestions-trigger">
@@ -116,7 +120,7 @@ return (
                                     placeholder={`Search "${placeholders[placeholderIndex]}"`}
                                     />
                                 
-                                <button type="submit" className="wt-input-btn-group__btn global-enhancements-search-input-btn-group__btn" value="Search" aria-label="Search" data-id="gnav-search-submit-button">   
+                                <button className="wt-input-btn-group__btn global-enhancements-search-input-btn-group__btn" >   
                                     <span className="wt-icon wt-nudge-b-2 wt-nudge-r-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 19a8.46 8.46 0 0 0 5.262-1.824l4.865 4.864 1.414-1.414-4.865-4.865A8.5 8.5 0 1 0 10.5 19m0-2a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13"></path></svg></span>
                                 </button>
                             </div>
@@ -160,7 +164,7 @@ return (
             <div className="icons-and-singin">
                 <ul>
                     <li className="sign-in-txt">
-                        <Link to="/login" >Sign In</Link>
+                        <NavLink to="/login" >Sign In</NavLink>
                     </li>
                     <li className="wish-list-icon">
                         <Link to="/wishList">
@@ -214,25 +218,22 @@ return (
             <div className="nav-links">
                  <h4>Browse Categories</h4>
                 <ul>
-                    <li><Link to="/hot-deals" >Hot Deal <img src={flameIcon} alt="" /></Link></li>
-                    <li><Link to="/accessories" >Accessories</Link></li>
-                    <li><Link to="/clothing" >Clothing</Link></li>
-                    <li><Link to="/electronics" >Electronics</Link></li>  
-                    <li className="new"><Link to="/furniture" >Furniture</Link></li>   
-                    <li ><Link to="/books" >Books</Link></li>  
-                     <li className="mobile" ><Link to="/books" >Shoes</Link></li>  
-                    <li  className="mobile"><Link to="/books" >Toys</Link></li> 
-                     <li className="mobile"><Link to="/books" >Women</Link></li>   
-                       <li className="mobile"><Link to="/books" >Men</Link></li> 
-                     
-
-                    
+                    <li ><NavLink to="/hot-deals"  onClick={closeMenu}>Hot Deal <img src={flameIcon} alt="" /></NavLink></li>
+                    <li><NavLink to="/accessories" onClick={closeMenu}>Accessories</NavLink></li>
+                    <li><NavLink to="/clothing" onClick={closeMenu}>Clothing</NavLink></li>
+                    <li><NavLink to="/electronics" onClick={closeMenu}>Electronics</NavLink></li>  
+                    <li className="new"><NavLink to="/furniture" onClick={closeMenu}>Furniture</NavLink></li>   
+                    <li ><NavLink to="/books" onClick={closeMenu}>Books</NavLink></li>  
+                    <li className="mobile" ><NavLink to="/shoes" onClick={closeMenu}>Shoes</NavLink></li>  
+                    <li  className="mobile"><NavLink to="/toys" onClick={closeMenu}>Toys</NavLink></li> 
                             
                 </ul>
             </div>
             
             <div className="contact-btn">
-                    <button>Contact Us</button>
+                    <a className="mob-contact" onClick={closeMenu} href="https://api.whatsapp.com/send/?phone=919990110229&text=Hi%20Mohan&app_absent=0" target="_blank" rel="noopener noreferrer">
+                        Contact Us
+                    </a>
             </div>
                 <div className="spacer-right">
                 </div>

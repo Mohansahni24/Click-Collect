@@ -52,6 +52,19 @@ export function useProductFilters(products = [], pageKey = "global") {
           const price = getPrice(product);
 
           switch (range) {
+            case "Under ₹500":
+              return price < 500;
+            case "₹500 - ₹1500":
+              return price >= 500 && price <= 1500;
+            case "₹1500 - ₹3000":
+              return price >= 1500 && price <= 3000;
+            case "₹3000 - ₹10000":
+              return price >= 3000 && price <= 10000;
+            case "₹10000 - ₹25000":
+              return price >= 10000 && price <= 25000;
+            case "Above ₹25000":
+              return price > 25000;
+            // Legacy/dollar options for backward compatibility:
             case "Under $50":
               return price < 50;
             case "$50 - $100":

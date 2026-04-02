@@ -69,11 +69,18 @@ function WishlistPage() {
                   </div>
                 </div>
 
-                <div className="Move-to-bag-btn" onClick={() => handleMoveToCart(item)}>
+                <div className="Move-to-bag-btn" onClick={(e) => {
+                   e.stopPropagation();
+                  handleMoveToCart(item)
+                }}>
                   <button className="btn-tertiary">Move to Bag</button>
                 </div>
 
-                <div className="remove-btn"  onClick= {() => removeItemFromWishlist(item)}>
+                <div className="remove-btn"  onClick= {(e) =>{
+                    e.stopPropagation();
+                   removeItemFromWishlist(item)
+                }
+                   }>
                   <span>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

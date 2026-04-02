@@ -14,7 +14,7 @@ function HotDeals(){
     
     const flashDealProducts = allProducts.filter(p => p.discount > 30);
 
-    const todayForYouProducts = allProducts.filter(p => p.discount > 20 && p.discount <= 30);
+    const todayForYouProducts = allProducts.filter(p => p.discount > 40 && p.discount <= 90);
 
     
         const sofaProduct = allProducts.find(p => p.id === "T01419" );

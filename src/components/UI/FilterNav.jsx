@@ -6,27 +6,31 @@ const FilterNav = ({ onFilterChange, onClearAllFilters, onSortChange, activeFilt
   
   // Define filter options
   const colorOptions = [
-    { label: 'Red', value: 'Red', color: 'red' },
+  
     { label: 'Blue', value: 'Blue', color: 'blue' },
-    { label: 'Green', value: 'Green', color: 'green' },
     { label: 'Black', value: 'Black', color: 'black' },
+    { label: 'Red', value: 'Red', color: 'red' },
     { label: 'White', value: 'White', color: 'white' },
-    { label: 'Yellow', value: 'Yellow', color: 'yellow' }
+    { label: 'Green', value: 'Green', color: 'green' }
   ];
   
   const ratingOptions = [
-    { label: '★★★★☆ & above', value: '4 ★' },
-    { label: '★★★☆☆ & above', value: '3 ★' },
-    { label: '★★☆☆☆ & above', value: '2 ★' },
-    { label: '★☆☆☆☆ & above', value: '1 ★' }
+    { label: '4.5★ & above', value: 4.5 },
+    { label: '4.0★ & above', value: 4.0 },
+    { label: '3.5★ & above', value: 3.5 },
+    { label: '3.0★ & above', value: 3.0 },
   ];
   
+   
   const priceOptions = [
-    { label: 'Under $50', value: 'Under $50' },
-    { label: '$50 - $100', value: '$50 - $100' },
-    { label: '$100 - $200', value: '$100 - $200' },
-    { label: 'Above $200', value: 'Above $200' }
+    { label: 'Under ₹500', value: 'Under ₹500' },
+    { label: '₹500 - ₹1500', value: '₹500 - ₹1500' },
+    { label: '₹1500 - ₹3000', value: '₹1500 - ₹3000' },
+    { label: '₹3000 - ₹10000', value: '₹3000 - ₹10000' },
+    { label: '₹10000 - ₹25000', value: '₹10000 - ₹25000' },
+    { label: 'Above ₹25000', value: 'Above ₹25000' }
   ];
+
 
   // Handle filter checkbox change
   const handleCheckboxChange = (type, value) => {
@@ -100,6 +104,46 @@ const FilterNav = ({ onFilterChange, onClearAllFilters, onSortChange, activeFilt
           <div className="all-filter-tags">
             <h2>Filters</h2>
 
+            {/* Price Range Filters */}
+            <div className="filter-section">
+              <h4>Price Range</h4>
+              {priceOptions.map((price) => (
+                <div className="filter-item" key={price.value}>
+                  <label className="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      className="checkbox-input"
+                      checked={isFilterActive('price', price.value)}
+                      onChange={() => handleCheckboxChange('price', price.value)}
+                    />
+                    <span className="checkbox-custom"></span>
+                    {price.label}
+                  </label>
+                </div>
+              ))}
+            </div>
+
+
+                 {/* Rating Filters */}
+            <div className="filter-section">
+              <h4>Rating</h4>
+              {ratingOptions.map((rating) => (
+                <div className="filter-item" key={rating.value}>
+                  <label className="checkbox-label">
+                    <input 
+                      type="checkbox" 
+                      className="checkbox-input"
+                      checked={isFilterActive('rating', rating.value)}
+                      onChange={() => handleCheckboxChange('rating', rating.value)}
+                    />
+                    <span className="checkbox-custom"></span>
+                    <span className="rating-option">{rating.label}</span>
+                  </label>
+                </div>
+              ))}
+            </div>
+
+
             {/* Color Filters */}
             <div className="filter-section">
               <h4>Color</h4>
@@ -125,43 +169,9 @@ const FilterNav = ({ onFilterChange, onClearAllFilters, onSortChange, activeFilt
               ))}
             </div>
 
-            {/* Rating Filters */}
-            <div className="filter-section">
-              <h4>Rating</h4>
-              {ratingOptions.map((rating) => (
-                <div className="filter-item" key={rating.value}>
-                  <label className="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      className="checkbox-input"
-                      checked={isFilterActive('rating', rating.value)}
-                      onChange={() => handleCheckboxChange('rating', rating.value)}
-                    />
-                    <span className="checkbox-custom"></span>
-                    <span className="rating-option">{rating.label}</span>
-                  </label>
-                </div>
-              ))}
-            </div>
+         
 
-            {/* Price Range Filters */}
-            <div className="filter-section">
-              <h4>Price Range</h4>
-              {priceOptions.map((price) => (
-                <div className="filter-item" key={price.value}>
-                  <label className="checkbox-label">
-                    <input 
-                      type="checkbox" 
-                      className="checkbox-input"
-                      checked={isFilterActive('price', price.value)}
-                      onChange={() => handleCheckboxChange('price', price.value)}
-                    />
-                    <span className="checkbox-custom"></span>
-                    {price.label}
-                  </label>
-                </div>
-              ))}
-            </div>
+            
           </div>  
 
           <div className="action-buttons filter-header">

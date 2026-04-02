@@ -232,81 +232,68 @@ const ProductDetailPage = () => {
                       <table className="chakra-table css-5605sr">
                         <tbody className="css-1ykoahy">
                             <tr className="css-0">
-                              <td className="css-xumdn4">Processor Series</td>
-                              <td className="css-k2m69w">Helium G88</td>
-                            </tr>
-                            <tr className="css-0">
-                              <td className="css-xumdn4">RAM</td>
-                              <td className="css-k2m69w">8 GB</td>
-                            </tr>
-                            <tr className="css-0">
-                              <td className="css-xumdn4">Screen resolution</td>
-                              <td className="css-k2m69w">2560 x 1600</td>
-                            </tr>
-                            <tr className="css-0">
-                              <td className="css-xumdn4">Storage capacity / Internal memory</td>
-                              <td className="css-k2m69w">128 GB</td>
-                            </tr>
-                            <tr className="css-0">
-                              <td className="css-xumdn4">Expandable memory</td>
-                              <td className="css-k2m69w">Up to 1 TB</td>
-                            </tr>
-                            <tr className="css-0">
-                              <td className="css-xumdn4">Charging Interface</td>
-                              <td className="css-k2m69w">USB-C</td>
-                            </tr>
-                            <tr className="css-0">
-                              <td className="css-xumdn4">Rear camera</td>
-                              <td className="css-k2m69w">8 mp</td>
-                            </tr>
-                            <tr className="css-0">
                               <td className="css-xumdn4">Brand</td>
-                              <td className="css-k2m69w">Lenovo</td>
+                              <td className="css-k2m69w">{product.brand}</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Warranty</td>
+                              <td className="css-xumdn4">Model No</td>
+                              <td className="css-k2m69w">N/A</td>
+                            </tr>
+                            
+                            <tr className="css-0">
+                              <td className="css-xumdn4">Warranty </td>
                               <td className="css-k2m69w">12 months</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Processor</td>
-                              <td className="css-k2m69w">MediaTek</td>
+                              <td className="css-xumdn4">Product Type</td>
+                              <td className="css-k2m69w" style={{ textTransform: 'capitalize' }}>{product.category}</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Front camera</td>
-                              <td className="css-k2m69w">5 mp</td>
+                              <td className="css-xumdn4">Product Category</td>
+                              <td className="css-k2m69w" style={{ textTransform: 'capitalize' }}>{product.subCategory}</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Screen size</td>
-                              <td className="css-k2m69w">11 inches</td>
+                              <td className="css-xumdn4">Measures</td>
+                              <td className="css-k2m69w">X x Y x Z cm</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Model #</td>
-                              <td className="css-k2m69w">IDEATAB 11+KEYBOARD</td>
+                              <td className="css-xumdn4">Rating</td>
+                              <td className="css-k2m69w">{product.rating}</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Operating System</td>
-                              <td className="css-k2m69w">Android</td>
+                              <td className="css-xumdn4">Number of Contents</td>
+                              <td className="css-k2m69w">1</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Battery capacity</td>
-                              <td className="css-k2m69w">7,040 mAh</td>
+                              <td className="css-xumdn4">Net Quantity</td>
+                              <td className="css-k2m69w">1</td>
                             </tr>
+                            
                             <tr className="css-0">
-                              <td className="css-xumdn4">Operating system version</td>
-                              <td className="css-k2m69w">15</td>  
+                              <td className="css-xumdn4">Certification</td>
+                              <td className="css-k2m69w">N/A</td>
                             </tr>
-                            <tr className="css-0">
-                              <td className="css-xumdn4">Model</td>
-                              <td className="css-k2m69w">Ideatab 11 + Keyboard</td>
-                            </tr>
-                            <tr className="css-0">
+                             <tr className="css-0">
                               <td className="css-xumdn4">Color</td>
-                              <td className="css-k2m69w">Grey</td>
+                              <td className="css-k2m69w">{product?.color}</td>
                             </tr>
                             <tr className="css-0">
-                              <td className="css-xumdn4">Product type</td>
-                              <td className="css-k2m69w">Tablet</td>
+                              <td className="css-xumdn4">Processor Series </td>
+                              <td className="css-k2m69w">N/A</td>
                             </tr>
+                            <tr className="css-0">
+                              <td className="css-xumdn4">Manufacture Date</td>
+                              <td className="css-k2m69w">09-2025</td>
+                            </tr>
+                            <tr className="css-0">
+                              <td className="css-xumdn4">Expiry</td>
+                              <td className="css-k2m69w">N/A</td>
+                            </tr>
+                           
+                          
+                          
+                    
+                           
                             <tr className="css-0">
                               <td className="css-xumdn4">Measures</td>
                               <td className="css-k2m69w">25.4 x 0.6 x 16.6 cm</td>

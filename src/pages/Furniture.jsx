@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {useSelector} from 'react-redux';
 import {selectAllFurnitureProducts} from '../features/products/productsSlice';
 import TopDealsProduct from '../components/UI/TopDeals';
@@ -15,6 +15,19 @@ function Furniture(){
     const allFurniture = useSelector(selectAllFurnitureProducts);
     console.log("allfurrrrrrrrr", allFurniture)
 
+    const [selectedCategory, setSelectedCategory] = useState("all");
+
+    const finalProducts = selectedCategory == "all" ? allFurniture : allFurniture.filter((item) => item.subCategory === selectedCategory);
+     
+    const itemsRef = useRef(null);
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+      
+        if (itemsRef.current) {
+          itemsRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+      };
 
   return (
     <div className="furniture-wrp">
@@ -27,30 +40,30 @@ function Furniture(){
             <h3>Shop By Categories</h3>
 
             <div className="all-category">
-                <div className="Cat-a all">
+                <div className={`Cat-a all ${selectedCategory === 'all' ? 'active' : ""}`} onClick={() =>  handleCategoryClick("all")}>
                     <img src="https://ii1.pepperfry.com/assets/w23-clip-ctg-all.png" alt="" />
                     <h4>All</h4>
                 </div>
-                <div className="Cat-a">
+                <div className={`Cat-a ${selectedCategory === 'sofa' ? 'active' : ""}`} onClick={() =>  handleCategoryClick("sofa")}>
                     <img src="https://ii1.pepperfry.com/media/wysiwyg/banners/1_3602X_110425.jpg" alt="" />
                     <h4>Sofas</h4>
                 </div>
-                <div className="Cat-a">
+                <div className={`Cat-a ${selectedCategory === 'beds' ? 'active' : ""}`} onClick={() =>  handleCategoryClick("beds")}>
                     <img src="https://ii1.pepperfry.com/media/wysiwyg/banners/2_3602X_110425.jpg" alt="" />
                     <h4>Beds</h4>
                 </div>
 
-                 <div className="Cat-a">
+                 <div className={`Cat-a ${selectedCategory === 'recliner' ? 'active' : ""}`} onClick={() =>  handleCategoryClick("recliner")}>
                     <img src="https://ii1.pepperfry.com/media/wysiwyg/banners/6_3602X_110425.jpg" alt="" />
                     <h4>Recliners</h4>
                 </div>
 
-                <div className="Cat-a">
+                <div className={`Cat-a ${selectedCategory === 'table' ? 'active' : ""}`} onClick={() =>  handleCategoryClick("table")}>
                     <img src="http://ii1.pepperfry.com/media/wysiwyg/banners/3_3602X_110425.jpg" alt="" />
                     <h4>Tables</h4>
                 </div>
                
-                <div className="Cat-a">
+                <div className={`Cat-a ${selectedCategory === 'wardobes' ? 'active' : ""}`} onClick={() =>  handleCategoryClick("wardobes")}>
                     <img src="https://ii1.pepperfry.com/media/wysiwyg/banners/8_3602X_110425.jpg" alt="" />
                     <h4>Wardobes</h4>
                 </div>
@@ -58,7 +71,7 @@ function Furniture(){
             </div>
        </div>
 
-       <div className="curated-category">
+       <div className="curated-category"  ref={itemsRef}>
             <h4>Curated Categories</h4>
             <div className="main">
 
@@ -71,8 +84,8 @@ function Furniture(){
             </div>
        </div>
 
-       <div className="all-items">
-            <TopDealsProduct   topDealProducts={allFurniture} />
+       <div className="all-items" >
+            <TopDealsProduct   topDealProducts={finalProducts } />
         
        </div>
 
