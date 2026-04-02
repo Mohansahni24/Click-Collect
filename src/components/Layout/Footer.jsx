@@ -11,7 +11,7 @@ function Footer() {
                 <div className="mid-left">
                  
                      <div className="logo">
-                              <img src="/src/assets/images/logo-transparent.png" alt="Logo" />           
+                              <img src="https://res.cloudinary.com/da0booxc5/image/upload/v1775109294/logo-transparent_w550hc.png" alt="Logo" />           
                      </div>
                 
                 </div>

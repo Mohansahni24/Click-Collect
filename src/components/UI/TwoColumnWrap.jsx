@@ -10,7 +10,7 @@ function TwoColumnWrap({product}) {
   return (
     <div className="two-column-wrap" >
       <div className="img-column" >
-          <img src={product.images[0]} alt="" />
+          <img src="https://res.cloudinary.com/da0booxc5/image/upload/v1775109155/beat-headphone_h6zvwq.webp" alt="" />
       </div>
       <div className="content-column" >
           <div className="content-wrp" >

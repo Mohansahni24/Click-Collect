@@ -2842,7 +2842,7 @@ select > option {
     font-size: 13px;
     font-weight: 700;
 }
-button.btn-primary, .choose-your-favorite-wrap .card .btn-tertiary{
+button.btn-primary, .choose-your-favorite-wrap .card .btn-tertiary, .address-container .text-container .save-btn button, .dealOfTheDay-page .view-btn button{
     color:white !important;
 }
 /* Responsive Design */
