@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import thankYouImage from '../../assets/images/thank-you.webp';
 
 const OrderConfirmation = () => {
@@ -15,7 +16,7 @@ const OrderConfirmation = () => {
               
            <div><img src={thankYouImage} alt="Thank You" /></div>
              <p>Your order has been confirmed. We will notify you with the details of your purchase once your order has been shipped.</p>
-             <a href="/my-orders">Track Order</a>
+             <Link to="/my-orders">Track Order</Link>
           </div>
         </div>
     )
