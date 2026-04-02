@@ -5,7 +5,7 @@ import { selectWishlistItems } from "./wishlistSlice";
 import { useWishlist } from "../..//hooks/useWishlist";
 import { useCart } from "../../hooks/useCart";
 import emptyWishlistImage from "../../assets/images/empty-wishlist-icon.png";
-import "./WishlistPage.css";
+
 
 function WishlistPage() {
   const navigate = useNavigate();
